@@ -1,5 +1,4 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
-import { use } from "express/lib/application";
 import { towerEventsService } from "../services/TowerEventsService.js";
 import BaseController from "../utils/BaseController.js";
 
@@ -25,6 +24,8 @@ export class TowerEventsController extends BaseController {
     }
     async editEvent(req, res, next) {
         try {
+            req.body.id = req.params.id
+            req.body.creatorId = req.userInfo.id
             const event = await towerEventsService.editEvent(req.body, req.userInfo.id)
             res.send(event)
         }

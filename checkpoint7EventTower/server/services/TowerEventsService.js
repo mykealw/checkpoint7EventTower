@@ -5,9 +5,10 @@ class TowerEventsService {
     async deleteEvent(eventId, userId) {
         const event = await this.getEventById(eventId)
         if (event.creatorId.toString() != userId) {
-            throw new Forbidden("You cannot delete what isn't yours")
+            throw new Forbidden("You cannot cancel what isn't yours")
         }
-        await event.findByIdAndDelete(eventId)
+        event.isCanceled = true
+        await event.save(event)
         return event
     }
     async editEvent(update, userId) {
@@ -27,7 +28,7 @@ class TowerEventsService {
         return original
     }
     async getEventById(id) {
-        const event = await dbContext.TowerEvent.find({}).populate('creator', 'picture name')
+        const event = await dbContext.TowerEvent.findById(id).populate('creator', 'picture name')
         if (!event) {
             throw new BadRequest('Invalid Id')
         }
@@ -39,7 +40,7 @@ class TowerEventsService {
         return event
     }
     async getAllEvents() {
-        const events = await dbContext.TowerEvent.find(query).populate('creator', 'name picture')
+        const events = await dbContext.TowerEvent.find({}).populate('creator', 'name picture')
         return events
     }
 

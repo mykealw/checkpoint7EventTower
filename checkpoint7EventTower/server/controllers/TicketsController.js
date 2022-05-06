@@ -4,10 +4,10 @@ import BaseController from '../utils/BaseController.js'
 
 export class TicketsController extends BaseController {
     constructor() {
-        super('')
+        super('api/tickets')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
-            .post('api/tickets', this.createTicket)
+            .post('', this.createTicket)
 
     }
     async createTicket(req, res, next) {
