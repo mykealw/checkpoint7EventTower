@@ -2,12 +2,12 @@
 {
   "folders": [
     {
-      "path": "checkpoint7EventTower.client",
-      "name": "client"
+      "name": "server",
+      "path": "checkpoint7EventTower"
     },
     {
-      "path": "checkpoint7EventTower",
-      "name": "server"
+      "name": "client",
+      "path": "checkpoint7EventTower.client"
     }
   ],
   "settings": {
