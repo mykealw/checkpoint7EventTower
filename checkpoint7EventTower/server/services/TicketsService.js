@@ -2,6 +2,10 @@ import { BadRequest, Forbidden } from "@bcwdev/auth0provider/lib/Errors";
 import { dbContext } from "../db/DbContext.js";
 
 class TicketsService {
+    async getTicketsByEvent(eventId) {
+        const eventTicket = await dbContext.Ticket.find({ eventId: eventId }).populate('account')
+        return eventTicket
+    }
     async getTicketsbyAccount(accountId) {
         const accountTicket = await dbContext.Ticket.find({ accountId: accountId }).populate('event')
         return accountTicket
