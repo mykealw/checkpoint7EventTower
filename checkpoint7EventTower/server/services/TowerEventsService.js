@@ -31,7 +31,7 @@ class TowerEventsService {
         return original
     }
     async getEventById(id) {
-        const event = await dbContext.TowerEvent.findById(id).populate('creator', 'picture name')
+        const event = await dbContext.TowerEvent.findById(id).populate('account', 'picture name')
         if (!event) {
             throw new BadRequest('Invalid Id')
         }
@@ -39,11 +39,11 @@ class TowerEventsService {
     }
     async createEvent(body) {
         const event = await dbContext.TowerEvent.create(body)
-        await event.populate('creator', 'name picture')
+        await event.populate('account', 'name picture')
         return event
     }
     async getAllEvents() {
-        const events = await dbContext.TowerEvent.find({}).populate('creator', 'name picture')
+        const events = await dbContext.TowerEvent.find({}).populate('account', 'name picture')
         return events
     }
 

@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { ticketsService } from '../services/TicketsService.js'
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -8,6 +9,15 @@ export class AccountController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getUserAccount)
+      .get('/tickets', this.getTicketsByAccount)
+  }
+  async getTicketsByAccount(req, res, next) {
+    try {
+      const accountTicket = await ticketsService.getTicketsbyAccount(req.userInfo.id)
+      res.send(accountTicket)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getUserAccount(req, res, next) {

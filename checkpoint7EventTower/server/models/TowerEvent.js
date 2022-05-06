@@ -17,8 +17,8 @@ export const TowerEventSchema = new Schema(
     { timestamps: true, toJSON: { virtuals: true } }
 )
 
-TowerEventSchema.virtual('creator', {
-    localField: 'creatorId',
+TowerEventSchema.virtual('account', {
+    localField: 'accountId',
     ref: 'Account',
     foreignField: '_id',
     justOne: true

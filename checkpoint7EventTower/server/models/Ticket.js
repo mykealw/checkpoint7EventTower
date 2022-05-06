@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 export const TicketSchema = new Schema(
     {
-        eventId: { type: Schema.Types.ObjectId, required: true, ref: 'Event' },
+        eventId: { type: Schema.Types.ObjectId, required: true, ref: 'TowerEvent' },
         accountId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
 
     },
@@ -19,7 +19,7 @@ TicketSchema.virtual('account', {
 
 TicketSchema.virtual('event', {
     localField: 'eventId',
-    ref: 'Event',
+    ref: 'TowerEvent',
     foreignField: '_id',
     justOne: true
 })
