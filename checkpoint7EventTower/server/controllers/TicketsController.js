@@ -12,7 +12,8 @@ export class TicketsController extends BaseController {
     }
     async createTicket(req, res, next) {
         try {
-            req.body.creatorId = req.userInfo.id
+            req.body.accountId = req.userInfo.id
+            // req.body.creatorId = req.userInfo.id
             const ticket = await ticketsService.createTicket(req.body)
             res.send(ticket)
         }

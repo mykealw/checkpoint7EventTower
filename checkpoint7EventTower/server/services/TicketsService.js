@@ -3,12 +3,16 @@ import { dbContext } from "../db/DbContext.js";
 
 class TicketsService {
     async createTicket(newTicket) {
-        const exists = await dbContext.Ticket.findOne({ accountId: newTicket.accountId, towerEventId: newTicket.towerEventId }).populate('creator', 'name picture')
-        if (exists) {
-            throw new Forbidden('You already have a ticket')
-        }
-        await exists.save()
-        return exists
+        const exists = await dbContext.Ticket.findOne({ accountId: newTicket.accountId, towerEventId: newTicket.towerEventId })
+        // if (exists) {
+        //     throw new Forbidden('You already have a ticket')
+        // }
+        const ticket = await dbContext.Ticket.create(newTicket)
+        await ticket.populate('account')
+        const event = await dbContext.TowerEvent.findById(ticket.eventId)
+        event.capacity--
+        await event.save()
+        return ticket
     }
 
 

@@ -16,6 +16,9 @@ class TowerEventsService {
             throw new Forbidden("You cannot edit an event that is not yours")
         }
         const original = await this.getEventById(update.id)
+        if (original.isCanceled) {
+            throw new BadRequest("this event has been canceled")
+        }
         original.name = update.name || original.name
         original.description = update.description || original.description
         original.coverImg = update.coverImg || original.coverImg
