@@ -27,7 +27,7 @@ export class CommentsController extends BaseController {
         try {
             req.body.creatorId = req.userInfo.id
             const comment = await commentsService.createComment(req.body)
-            res.send(comment)
+            return res.send(comment)
         }
         catch (error) {
             next(error)

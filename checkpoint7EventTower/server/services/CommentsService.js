@@ -3,11 +3,11 @@ import { BadRequest, Forbidden } from "@bcwdev/auth0provider/lib/Errors";
 
 class CommentsService {
     async deleteComment(commentId, userId) {
-        const comment = await dbContext.Comment.findById(commentId)
+        const comment = await dbContext.Comments.findById(commentId)
         if (comment.creatorId.toString() !== userId) {
             throw new Forbidden('This comment is not yours to delete')
         }
-        await dbContext.Comment.findByIdAndDelete(commentId)
+        await dbContext.Comments.findByIdAndDelete(commentId)
         return comment
     }
     async getCommentsByEvent(query) {
@@ -18,8 +18,8 @@ class CommentsService {
         return eventComment
     }
     async createComment(body) {
-        const comment = await dbContext.Comment.create(body)
-        await comment.populate('creator')
+        const comment = await dbContext.Comments.create(body)
+        await comment.populate('creator', 'name picture')
         return comment
     }
 
