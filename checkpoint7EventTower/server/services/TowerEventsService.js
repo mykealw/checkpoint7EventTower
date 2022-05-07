@@ -12,10 +12,6 @@ class TowerEventsService {
         return event
     }
     async editEvent(update, userId) {
-        // const update = await dbContext.TowerEvent.findById(eventId)
-        // if (update.creatorId != userId) {
-        //     throw new Forbidden("You cannot edit an event that is not yours")
-        // }
         const original = await this.getEventById(update.id)
         if (original.isCanceled) {
             throw new BadRequest("this event has been canceled")
@@ -41,8 +37,8 @@ class TowerEventsService {
         }
         return event
     }
-    async createEvent(body) {
-        const event = await dbContext.TowerEvent.create(body)
+    async createEvent(newEvent) {
+        const event = await dbContext.TowerEvent.create(newEvent)
         await event.populate('account', 'name picture')
         return event
     }

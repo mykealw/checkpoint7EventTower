@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 export const CommentSchema = new Schema(
     {
         creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
-        towerEventId: { type: Schema.Types.ObjectId, required: true, ref: 'TowerEvent' },
+        eventId: { type: Schema.Types.ObjectId, required: true, ref: 'TowerEvent' },
         body: { type: String, required: true },
         isAttending: { type: Boolean },
 
@@ -13,13 +13,13 @@ export const CommentSchema = new Schema(
 
 CommentSchema.virtual('creator', {
     localField: 'creatorId',
-    ref: 'Account',
+    ref: 'Profile',
     foreignField: '_id',
     justOne: true
 })
 
-CommentSchema.virtual('towerEvent', {
-    localField: 'TowerEventId',
+CommentSchema.virtual('event', {
+    localField: 'eventId',
     ref: 'TowerEvent',
     foreignField: '_id',
     justOne: true
