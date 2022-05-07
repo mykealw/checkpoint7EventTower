@@ -35,7 +35,7 @@ export class TowerEventsController extends BaseController {
     async editEvent(req, res, next) {
         try {
             req.body.id = req.params.id
-            req.body.creatorId = req.userInfo.id
+            // req.body.creatorId = req.userInfo.id
             const event = await towerEventsService.editEvent(req.body, req.userInfo.id)
             res.send(event)
         }

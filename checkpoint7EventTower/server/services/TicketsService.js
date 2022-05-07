@@ -2,6 +2,16 @@ import { BadRequest, Forbidden } from "@bcwdev/auth0provider/lib/Errors";
 import { dbContext } from "../db/DbContext.js";
 
 class TicketsService {
+    async deleteTicket(ticketId, userId) {
+        const byeTicket = await dbContext.Ticket.findById({ ticketId })
+        if (byeTicket.accountId != userId) {
+            throw new BadRequest('not your ticket to delete')
+        }
+        await byeTicket.remove()
+        const event = await dbContext.TowerEvent.findById(byeTicket.eventId)
+        event.capacity++
+        return byeTicket
+    }
     async getTicketsByEvent(eventId) {
         const eventTicket = await dbContext.Ticket.find({ eventId: eventId }).populate('account')
         return eventTicket

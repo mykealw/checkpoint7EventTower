@@ -12,12 +12,16 @@ class TowerEventsService {
         return event
     }
     async editEvent(update, userId) {
-        if (update.creatorId.toString() != userId) {
-            throw new Forbidden("You cannot edit an event that is not yours")
-        }
+        // const update = await dbContext.TowerEvent.findById(eventId)
+        // if (update.creatorId != userId) {
+        //     throw new Forbidden("You cannot edit an event that is not yours")
+        // }
         const original = await this.getEventById(update.id)
         if (original.isCanceled) {
             throw new BadRequest("this event has been canceled")
+        }
+        if (original.creatorId.toString() != userId) {
+            throw new BadRequest("this isn't yours to delete")
         }
         original.name = update.name || original.name
         original.description = update.description || original.description
