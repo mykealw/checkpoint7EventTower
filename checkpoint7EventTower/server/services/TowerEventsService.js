@@ -42,8 +42,8 @@ class TowerEventsService {
         await event.populate('account', 'name picture')
         return event
     }
-    async getAllEvents() {
-        const events = await dbContext.TowerEvent.find({}).populate('account', 'name picture')
+    async getAllEvents(query = {}) {
+        const events = await dbContext.TowerEvent.find(query).populate('account', 'name picture')
         return events
     }
 
