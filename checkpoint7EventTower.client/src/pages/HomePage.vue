@@ -88,7 +88,7 @@
   </div>
   <div class="row">
     <div class="col-md-3" :title="e.name" v-for="e in events" :key="e.id">
-      <TowerEvent :event="e" />
+      <TowerEvent :event="e" @click="goTo(e.id)" />
     </div>
   </div>
 </template>
@@ -132,6 +132,19 @@ export default {
           logger.log(error);
           Pop.toast(error.message, "error");
         }
+      },
+      async goTo(id) {
+        try {
+          await eventsService.getActiveEvent(id)
+          router.push({
+            name: 'Event',
+            params: { id: AppState.activeEvent.id }
+          })
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
       }
 
     }
@@ -157,7 +170,7 @@ export default {
   border: 5px;
 }
 .marginT {
-  margin-top: -15vh;
+  margin-top: -7rem;
   margin-left: 5vw;
 }
 .picfont {
