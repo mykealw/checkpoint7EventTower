@@ -30,7 +30,7 @@
         v-if="account.name"
         data-bs-toggle="modal"
         data-bs-target="#create-event"
-        class="btn btn-success text-dark px-1 py-0"
+        class="btn btn-success text-dark px-1 py-0 m-2"
         title="create event"
         max-height="fit-content"
       >

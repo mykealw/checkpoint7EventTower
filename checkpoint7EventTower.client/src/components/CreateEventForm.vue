@@ -69,8 +69,10 @@ export default {
           router.push({
             name: 'Event',
             params: { id: AppState.activeEvent.id }
-          })
+          }
+          )
           Modal.getOrCreateInstance(document.getElementById('create-event')).toggle()
+          edit.value = {}
         } catch (error) {
           logger.log(error)
           Pop.toast(error.message, 'error')

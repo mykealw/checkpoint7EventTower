@@ -51,7 +51,7 @@
   </div>
   <div class="about row">
     <div class="col-md-3" v-for="e in myEvents" :key="e.id">
-      <MyEvents :myEvent="e" />
+      <MyEvents :myEvent="e" @click="goTo(e.id)" />
     </div>
   </div>
 </template>
@@ -64,11 +64,13 @@ import Pop from '../utils/Pop.js'
 import { accountService } from '../services/AccountService.js'
 import { eventsService } from '../services/EventsService.js'
 import { ticketsService } from '../services/TicketsService.js'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Account',
   setup() {
     const editing = ref(false);
     const edit = ref({});
+    const router = useRouter
     onMounted(async () => {
       try {
         await eventsService.getAllEvents()
@@ -100,7 +102,19 @@ export default {
         }
 
       },
-
+      async goTo(id) {
+        try {
+          await eventsService.getActiveEvent(id)
+          router.push({
+            name: 'Event',
+            params: { id: AppState.activeEvent.id }
+          })
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      }
     }
   }
 }

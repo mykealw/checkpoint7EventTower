@@ -43,6 +43,14 @@
         </button>
       </div>
     </div>
+    <div
+      v-if="events.creatorId == account.id && events.isCanceled == false"
+      class="col-md-6"
+    >
+      <button class="btn btn-danger" @click="cancelEvent(events.id)">
+        Cancel Event
+      </button>
+    </div>
   </div>
   <div class="row mt-4 d-flex justify-content-center">
     <div class="col-md-11 bg-dark rounded p-3">
@@ -84,6 +92,7 @@ export default {
       coverImg: computed(() => AppState.activeEvent.coverImg),
       ticket: computed(() => AppState.tickets),
       stonks: computed(() => AppState.myTickets.find(s => s.eventId == AppState.activeEvent.id)),
+      account: computed(() => AppState.account),
 
       async createTicket(eventId) {
         try {
@@ -97,6 +106,17 @@ export default {
         }
         catch (error) {
           logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async cancelEvent(eventId) {
+        try {
+          if (await Pop.confirm()) {
+            await eventsService.cancelEvent(eventId)
+          }
+        }
+        catch (error) {
+          logger.log(error)
           Pop.toast(error.message, "error");
         }
       }

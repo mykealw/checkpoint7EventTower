@@ -29,10 +29,12 @@ class EventsService {
         AppState.myEvents.unshift(res.data)
     }
     async getMyEvents(accountId) {
-        // debugger 
-        // logger.log(AppState.towerEvents, "all events")
         AppState.myEvents = AppState.towerEvents.filter(e => e.creatorId.toString() == accountId.toString())
         // logger.log(AppState.myEvents, "my events")
+    }
+    async cancelEvent(eventId) {
+        const res = await api.delete('api/events/' + eventId)
+        logger.log(res.data, "canceled event")
     }
 }
 
