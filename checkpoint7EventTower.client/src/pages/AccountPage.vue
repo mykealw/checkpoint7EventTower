@@ -49,9 +49,9 @@
       </div>
     </form>
   </div>
-  <div class="about row" v-for="e in myEvents" :key="e.id" :myEvent="e">
-    <div class="col-md-3">
-      <MyEvents />
+  <div class="about row">
+    <div class="col-md-3" v-for="e in myEvents" :key="e.id">
+      <MyEvents :myEvent="e" />
     </div>
   </div>
 </template>
@@ -73,6 +73,7 @@ export default {
       try {
         await eventsService.getAllEvents()
         await ticketsService.getMyTickets()
+        await eventsService.getMyEvents(AppState.account.id)
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message, "error")
@@ -82,7 +83,7 @@ export default {
       edit,
       editing,
       account: computed(() => AppState.account),
-      myEvents: computed(() => AppState.events.filter(e => e.creatorId.toString() !== account.id.toString())),
+      myEvents: computed(() => AppState.myEvents),
       async editAccount() {
         try {
           if (!edit.value.name) {

@@ -3,6 +3,7 @@
     class="img-fluid avatar p-1"
     :src="ticket.account.picture"
     :alt="ticket.account.name"
+    :title="ticket.account.name"
   />
 </template>
 

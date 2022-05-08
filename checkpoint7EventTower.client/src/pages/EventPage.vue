@@ -34,7 +34,11 @@
           </h4>
           <h4 v-if="events.isCanceled" class="text-danger">EVENT CANCELED</h4>
         </div>
-        <button class="btn btn-warning" @click="createTicket(events.id)">
+        <button
+          v-if="events.capacity > 0 && events.isCanceled == false && !stonks"
+          class="btn btn-warning"
+          @click="createTicket(events.id)"
+        >
           Attend <i class="mdi mdi-moped"></i>
         </button>
       </div>
@@ -57,6 +61,7 @@ import { eventsService } from '../services/EventsService.js'
 import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
 import { ticketsService } from '../services/TicketsService.js'
+import { accountService } from '../services/AccountService.js'
 export default {
   setup() {
     const route = useRoute()
@@ -65,6 +70,7 @@ export default {
       try {
         if (route.name == 'Event') {
           await eventsService.getActiveEvent(route.params.id)
+          await accountService.getMyTickets()
           await ticketsService.getAllTickets(route.params.id)
 
         }
@@ -77,6 +83,7 @@ export default {
       events: computed(() => AppState.activeEvent),
       coverImg: computed(() => AppState.activeEvent.coverImg),
       ticket: computed(() => AppState.tickets),
+      stonks: computed(() => AppState.myTickets.find(s => s.eventId == AppState.activeEvent.id)),
 
       async createTicket(eventId) {
         try {

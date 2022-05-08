@@ -19,7 +19,8 @@
           <img
             :src="account.picture"
             alt="account photo"
-            height="40"
+            height="60"
+            :title="account.name"
             class="rounded"
           />
           <span class="mx-3 text-success lighten-30">{{ account.name }}</span>
