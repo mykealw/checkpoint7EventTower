@@ -6,7 +6,7 @@
         src="src\assets\img\chairs.jpg"
         alt=""
       />
-      <h3 class="text-primary position-absolute marginT picfont text-start">
+      <h3 class="text-primary position-absolute marginT picfont ts text-start">
         Get ahead of the scalpers.<br />Reserve your seat now with<br />real
         events for real people.
       </h3>
@@ -181,5 +181,9 @@ export default {
 }
 .roundright {
   border-radius: 0px 15px 15px 0px;
+}
+.ts {
+  text-shadow: 1px 1px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
+    -1px 1px 0 #141414, 1px 1px 0 #141414;
 }
 </style>
