@@ -54,13 +54,32 @@
     </form>
   </div>
   <div class="about row">
+    <h4 class="text-success picfont my-auto">My Events</h4>
     <div class="col-md-3" v-for="e in myEvents" :key="e.id">
       <MyEvents :myEvent="e" @click="goTo(e.id)" />
     </div>
   </div>
   <div class="row">
-    <div class="col-md-5" v-for="t in myTickets" :key="t.id">
-      <MyTickets :myTicket="t" />
+    <h4 class="text-success picfont my-auto">Upcoming Events</h4>
+    <div class="col-md-7 d-flex jcsa" v-for="t in myTickets" :key="t.id">
+      <div class="d-flex  m-3 ticlen rounded bg-dark">
+        <img
+          class="ticpic rounded"
+          :title="t.event.name"
+          :src="t.event.coverImg"
+          :alt="t.event.name"
+        />
+        <h3 class="picfont p-2">
+          <b> {{ t.event.name }} </b><br />
+          <span class="text-success"
+            >{{ t.event.location }} <br />
+            {{ new Date(t.event.startDate).toDateString() }}</span
+          >
+        </h3>
+        <div class="">
+          <div class="bg-success position-absolulte hole"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -133,5 +152,25 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+}
+.picfont {
+  font-family: "Alegreya Sans", sans-serif;
+}
+.ticpic {
+  height: 26vh;
+  width: 100%;
+}
+.jcsa {
+  justify-content: space-around;
+}
+.ticlen {
+  width: 500px;
+}
+.hole {
+  height: 100px;
+  border-radius: 50%;
+  width: 100px;
+  margin-left: 50%;
+  margin-top: 25%;
 }
 </style>

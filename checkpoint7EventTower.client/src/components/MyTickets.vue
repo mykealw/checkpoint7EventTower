@@ -1,6 +1,8 @@
 <template>
-  <div class="component">
-    <h1>HELLO</h1>
+  <div class="mytickets row">
+    <div class="col-md-7">
+      <img :src="myTicket.coverImg" alt="" />
+    </div>
   </div>
 </template>
 

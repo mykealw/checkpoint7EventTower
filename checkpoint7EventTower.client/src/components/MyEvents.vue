@@ -1,6 +1,6 @@
 <template>
   <div class="myevent p-1 bg-dark rounded position-relative my-2 selectable">
-    <img class="rounded eI" :src="myEvent.coverImg" :alt="myEvent.name" />
+    <img class="rounded eI" :title="myEvent.name" :src="myEvent.coverImg" :alt="myEvent.name" />
     <div class="position-absolute z3">
       <h5 class="text-light tt">{{ myEvent.name }}</h5>
       <h6 class="text-light ts ms-2">
