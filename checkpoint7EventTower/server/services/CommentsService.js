@@ -10,8 +10,9 @@ class CommentsService {
         await dbContext.Comments.findByIdAndDelete(commentId)
         return comment
     }
-    async getCommentsByEvent(query) {
-        const eventComment = await dbContext.TowerEvent.find(query).populate('creator', 'account')
+    async getCommentsByEvent(eventId) {
+        const eventComment = await dbContext.Comments.find({ eventId: eventId }).populate('creator', 'name picture')
+        // await eventComment.populate('creator', 'name picture')
         if (!eventComment) {
             throw new BadRequest("no comments")
         }

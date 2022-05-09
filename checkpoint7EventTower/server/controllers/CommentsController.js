@@ -14,9 +14,9 @@ export class CommentsController extends BaseController {
     }
     async deleteComment(req, res, next) {
         try {
-            const commentId = req.params.Id
-            const userId = req.userInfo.Id
-            const comment = await commentsService.deleteComment(commentId, userId)
+            // const commentId = req.params.Id
+            // const userId = req.userInfo.Id
+            const comment = await commentsService.deleteComment(req.params.id, req.userInfo.id)
             res.send(comment)
         }
         catch (error) {
