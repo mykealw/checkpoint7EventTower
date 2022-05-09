@@ -3,15 +3,15 @@ import { dbContext } from "../db/DbContext.js";
 
 class TicketsService {
     async deleteTicket(ticketId, userId) {
-        const byeTicket = await dbContext.Ticket.findById(ticketId)
-        if (byeTicket.accountId.toString() !== userId) {
+        const ticket = await dbContext.Ticket.findById(ticketId)
+        if (ticket.accountId.toString() !== userId) {
             throw new BadRequest('not your ticket to delete')
         }
-        const event = await dbContext.TowerEvent.findById(byeTicket.eventId)
+        const event = await dbContext.TowerEvent.findById(ticket.eventId)
         event.capacity++
         await event.save()
-        await dbContext.Ticket.remove(byeTicket)
-        return byeTicket
+        await dbContext.Ticket.remove(ticket)
+        return ticket
     }
     async getTicketsByEvent(eventId) {
         const eventTicket = await dbContext.Ticket.find({ eventId: eventId }).populate('account')
@@ -24,7 +24,7 @@ class TicketsService {
     async createTicket(newTicket) {
         const exists = await dbContext.Ticket.findOne({ accountId: newTicket.accountId, towerEventId: newTicket.towerEventId })
         const ticket = await dbContext.Ticket.create(newTicket)
-        await ticket.populate('account')
+        await ticket.populate('account event')
         const event = await dbContext.TowerEvent.findById(ticket.eventId)
         event.capacity--
         await event.save()

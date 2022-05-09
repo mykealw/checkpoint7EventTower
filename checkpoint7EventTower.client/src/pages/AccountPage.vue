@@ -61,24 +61,26 @@
   </div>
   <div class="row">
     <h4 class="text-success picfont my-auto">Upcoming Events</h4>
-    <div class="col-md-7 d-flex jcsa" v-for="t in myTickets" :key="t.id">
-      <div class="d-flex  m-3 ticlen rounded bg-dark">
+    <div class="col-md-6 d-flex jcsa" v-for="t in myTickets" :key="t.id">
+      <div class="d-flex m-3 ticlen rounded bg-dark">
         <img
           class="ticpic rounded"
           :title="t.event.name"
           :src="t.event.coverImg"
           :alt="t.event.name"
         />
-        <h3 class="picfont p-2">
+        <h4 class="picfont p-2">
           <b> {{ t.event.name }} </b><br />
           <span class="text-success"
             >{{ t.event.location }} <br />
             {{ new Date(t.event.startDate).toDateString() }}</span
           >
-        </h3>
-        <div class="">
-          <div class="bg-success position-absolulte hole"></div>
-        </div>
+          <br />
+          <button class="btn btn-danger " @click="deleteTicket(t.id)">
+            Delete Ticket
+          </button>
+        </h4>
+        <!-- <div class="bg-success position-absolulte hole"></div> -->
       </div>
     </div>
   </div>
@@ -138,6 +140,17 @@ export default {
             name: 'Event',
             params: { id: AppState.activeEvent.id }
           })
+        }
+        catch (error) {
+          logger.log(error);
+          Pop.toast(error.message, "error");
+        }
+      },
+      async deleteTicket(id) {
+        try {
+          if (await Pop.confirm()) {
+            await ticketsService.deleteTicket(id)
+          }
         }
         catch (error) {
           logger.log(error);

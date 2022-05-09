@@ -69,6 +69,28 @@
       <Tickets v-for="t in ticket" :key="t.id" :ticket="t" />
     </div>
   </div>
+  <div class="row mt-4">
+    <div class="col-md-10">
+      <form @submit.prevent="createComment()">
+        <label for="New Comment"> New Comment:</label>
+        <textarea
+          v-model="comment.body"
+          name="New Comment"
+          id="New Comment"
+          rows="5"
+          cols="100"
+        ></textarea>
+        <div>
+          <button class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-10">
+      <div class="row" v-for="c in comments" :key="c.id">
+        <Comments :comment="c" />
+      </div>
+    </div>
+  </div>
   <Modal id="edit-event">
     <template #title> <h4>Edit Event</h4> </template>
     <template #body> <EditEventForm /> </template>
@@ -86,16 +108,19 @@ import { logger } from '../utils/Logger.js'
 import Pop from '../utils/Pop.js'
 import { ticketsService } from '../services/TicketsService.js'
 import { accountService } from '../services/AccountService.js'
+import { commentsService } from '../services/CommentsService.js'
 export default {
   setup() {
     const route = useRoute()
     const editing = ref(false)
+    const comment = ref({})
     watchEffect(async () => {
       try {
         if (route.name == 'Event') {
           await eventsService.getActiveEvent(route.params.id)
           await accountService.getMyTickets()
           await ticketsService.getAllTickets(route.params.id)
+          await commentsService.getAllComments(route.params.id)
 
         }
       } catch (error) {
@@ -104,12 +129,14 @@ export default {
       }
     })
     return {
+      comment,
       editing,
       events: computed(() => AppState.activeEvent),
       coverImg: computed(() => AppState.activeEvent.coverImg),
       ticket: computed(() => AppState.tickets),
       stonks: computed(() => AppState.myTickets.find(s => s.eventId == AppState.activeEvent.id)),
       account: computed(() => AppState.account),
+      comments: computed(() => AppState.comments.filter(c => c.eventId == AppState.activeEvent.id)),
 
       async createTicket(eventId) {
         try {
@@ -131,6 +158,18 @@ export default {
           if (await Pop.confirm()) {
             await eventsService.cancelEvent(eventId)
           }
+        }
+        catch (error) {
+          logger.log(error)
+          Pop.toast(error.message, "error");
+        }
+      },
+      async createComment() {
+        try {
+          comment.value.eventId = this.events.id
+          comment.value.creatorId = this.account.id
+          await commentsService.createComment(comment.value)
+          comment.value = {}
         }
         catch (error) {
           logger.log(error)
