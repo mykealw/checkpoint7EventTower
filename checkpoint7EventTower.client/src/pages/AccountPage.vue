@@ -64,6 +64,7 @@
     <div class="col-md-6 d-flex jcsa" v-for="t in myTickets" :key="t.id">
       <div class="d-flex m-3 ticlen rounded bg-dark">
         <img
+          @click="goTo(t.eventId)"
           class="ticpic rounded"
           :title="t.event.name"
           :src="t.event.coverImg"
@@ -76,7 +77,7 @@
             {{ new Date(t.event.startDate).toDateString() }}</span
           >
           <br />
-          <button class="btn btn-danger " @click="deleteTicket(t.id)">
+          <button class="btn btn-danger" @click="deleteTicket(t.id)">
             Delete Ticket
           </button>
         </h4>
@@ -105,7 +106,6 @@ export default {
       try {
         await eventsService.getAllEvents()
         await ticketsService.getMyTickets()
-        await eventsService.getMyEvents(AppState.account.id)
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message, "error")

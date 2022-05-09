@@ -40,16 +40,16 @@ class EventsService {
         // logger.log(eventUpdate, "this is what is coming through")
         debugger
         const res = await api.put('api/events/' + eventUpdate.id, eventUpdate)
-        logger.log(res.data, "this is the update")
+        // logger.log(res.data, "this is the update")
         let index = AppState.towerEvents.findIndex(e => e.id === res.data.id)
         if (index != -1) {
             AppState.towerEvents.splice(index, 1, res.data)
-            logger.log("1")
+            // logger.log("1")
         }
         let index2 = AppState.myEvents.findIndex(e => e.id === res.data.id)
         if (index2 != -1) {
             AppState.myEvents.splice(index2, 1, res.data)
-            logger.log("2")
+            // logger.log("2")
         }
         AppState.activeEvent = res.data
     }

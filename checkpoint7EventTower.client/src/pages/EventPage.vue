@@ -64,7 +64,7 @@
       </button>
     </div>
   </div>
-  <div class="row mt-4 d-flex justify-content-center">
+  <div v-if="events.isCanceled == false" class="row mt-4 d-flex justify-content-center">
     <div class="col-md-11 bg-dark rounded p-1">
       <Tickets v-for="t in ticket" :key="t.id" :ticket="t" />
     </div>
@@ -118,7 +118,6 @@ export default {
       try {
         if (route.name == 'Event') {
           await eventsService.getActiveEvent(route.params.id)
-          await accountService.getMyTickets()
           await ticketsService.getAllTickets(route.params.id)
           await commentsService.getAllComments(route.params.id)
 

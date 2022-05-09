@@ -10,14 +10,14 @@ class CommentsService {
         AppState.comments.unshift(res.data)
     }
     async getAllComments(eventId) {
-        logger.log(eventId, "eventID?")
+        // logger.log(eventId, "eventID?")
         const res = await api.get('api/events/' + eventId + '/comments')
-        logger.log(res.data, "here the comments")
+        // logger.log(res.data, "here the comments")
         AppState.comments = res.data
     }
     async deleteComment(commentId) {
         const res = await api.delete('api/comments/' + commentId)
-        logger.log(res.data, "deleted comment")
+        // logger.log(res.data, "deleted comment")
         AppState.comments = AppState.comments.filter(c => c.id != commentId)
 
     }
