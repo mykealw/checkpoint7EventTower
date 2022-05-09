@@ -11,7 +11,7 @@ class CommentsService {
         return comment
     }
     async getCommentsByEvent(query) {
-        const eventComment = await dbContext.TowerEvent.find(query).populate('creator')
+        const eventComment = await dbContext.TowerEvent.find(query).populate('creator', 'account')
         if (!eventComment) {
             throw new BadRequest("no comments")
         }
