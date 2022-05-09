@@ -47,16 +47,32 @@
       v-if="events.creatorId == account.id && events.isCanceled == false"
       class="col-md-6"
     >
-      <button class="btn btn-danger" @click="cancelEvent(events.id)">
+      <button
+        class="btn btn-danger m-1"
+        title="Cancel Event"
+        @click="cancelEvent(events.id)"
+      >
         Cancel Event
+      </button>
+      <button
+        title="Edit Event"
+        class="bg-primary btn m-1"
+        data-bs-toggle="modal"
+        data-bs-target="#edit-event"
+      >
+        Edit Event <i class="mdi mdi-pencil"></i>
       </button>
     </div>
   </div>
   <div class="row mt-4 d-flex justify-content-center">
-    <div class="col-md-11 bg-dark rounded p-3">
+    <div class="col-md-11 bg-dark rounded p-1">
       <Tickets v-for="t in ticket" :key="t.id" :ticket="t" />
     </div>
   </div>
+  <Modal id="edit-event">
+    <template #title> <h4>Edit Event</h4> </template>
+    <template #body> <EditEventForm /> </template>
+  </Modal>
 </template>
 
 
@@ -73,7 +89,7 @@ import { accountService } from '../services/AccountService.js'
 export default {
   setup() {
     const route = useRoute()
-    const editable = ref({})
+    const editing = ref(false)
     watchEffect(async () => {
       try {
         if (route.name == 'Event') {
@@ -88,6 +104,7 @@ export default {
       }
     })
     return {
+      editing,
       events: computed(() => AppState.activeEvent),
       coverImg: computed(() => AppState.activeEvent.coverImg),
       ticket: computed(() => AppState.tickets),

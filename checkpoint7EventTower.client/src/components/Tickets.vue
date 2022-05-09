@@ -25,8 +25,8 @@ export default {
 
 <style lang="scss" scoped>
 .avatar {
-  height: 10vh;
-  width: 10vw;
+  height: 8vh;
+  width: 7vw;
   border-radius: 50%;
   border: 3px;
   border-color: black;

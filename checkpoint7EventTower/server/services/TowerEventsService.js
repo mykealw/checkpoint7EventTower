@@ -22,11 +22,11 @@ class TowerEventsService {
         original.name = update.name || original.name
         original.description = update.description || original.description
         original.coverImg = update.coverImg || original.coverImg
-        original.location = update.coverImg || original.location
+        original.location = update.location || original.location
         original.capacity = update.capacity || original.capacity
         original.startDate = update.startDate || original.startDate
         original.type = update.type || original.type
-        original.isAttending = update.isAttending
+        original.isAttending = update.isAttending || original.isAttending
         await original.save()
         return original
     }

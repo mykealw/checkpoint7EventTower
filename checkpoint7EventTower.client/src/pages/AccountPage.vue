@@ -11,11 +11,11 @@
           rounded
           text-center
         "
-        @click="editing = true"
+        @click="editing = !editing"
         title="Edit Account"
       >
         Edit Account
-        <i class="ms-2 mdi mdi-pencil"></i>
+        <i class="ms-2 mdi mdi-account-edit-outline"></i>
       </h5>
     </div>
     <form class="p-3" v-if="editing == true" @submit.prevent="editAccount()">
@@ -42,7 +42,11 @@
         />
       </div>
       <div>
-        <button class="btn bg-danger" @click="editing = false" title="Cancel">
+        <button
+          class="btn bg-danger"
+          @click="editing = !editing"
+          title="Cancel"
+        >
           Cancel
         </button>
         <button class="btn bg-success ms-2" title="Submit">Submit</button>
@@ -52,6 +56,11 @@
   <div class="about row">
     <div class="col-md-3" v-for="e in myEvents" :key="e.id">
       <MyEvents :myEvent="e" @click="goTo(e.id)" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5" v-for="t in myTickets" :key="t.id">
+      <MyTickets :myTicket="t" />
     </div>
   </div>
 </template>
@@ -70,7 +79,7 @@ export default {
   setup() {
     const editing = ref(false);
     const edit = ref({});
-    const router = useRouter
+    const router = useRouter()
     onMounted(async () => {
       try {
         await eventsService.getAllEvents()
@@ -86,6 +95,7 @@ export default {
       editing,
       account: computed(() => AppState.account),
       myEvents: computed(() => AppState.myEvents),
+      myTickets: computed(() => AppState.myTickets),
       async editAccount() {
         try {
           if (!edit.value.name) {
