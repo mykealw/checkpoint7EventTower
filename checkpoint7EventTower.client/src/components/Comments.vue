@@ -4,6 +4,7 @@
       <img
         class="rounded compic"
         :src="comment.creator.picture"
+        :title="comment.creator.name"
         :alt="comment.creator.name"
       />
       <h6>{{ comment.creator.name }}</h6>
@@ -14,6 +15,7 @@
     <div>
       <button
         v-if="comment.creatorId == account.id"
+        title="delete comment"
         class="btn btn-danger"
         @click="deleteComment(comment.id)"
       >

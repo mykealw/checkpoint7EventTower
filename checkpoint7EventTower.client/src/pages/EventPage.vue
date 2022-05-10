@@ -75,16 +75,17 @@
   <div class="row mt-4">
     <div class="col-md-10">
       <form @submit.prevent="createComment()">
-        <label for="New Comment"> New Comment:</label>
+        <label for="New Comment" class="visually-hidden"> New Comment:</label>
         <textarea
           v-model="comment.body"
           name="New Comment"
           id="New Comment"
           rows="5"
+          title="New Comment"
           cols="100"
         ></textarea>
         <div class="d-flex justify-content-end col-md-2">
-          <button class="btn btn-success">Submit</button>
+          <button title="submit" class="btn btn-success">Submit</button>
         </div>
       </form>
     </div>
