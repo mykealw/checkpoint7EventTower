@@ -176,14 +176,16 @@ export default {
 .picfont {
   font-family: "Alegreya Sans", sans-serif;
 }
-.roundleft {
-  border-radius: 15px 0px 0px 15px;
-}
-.roundright {
-  border-radius: 0px 15px 15px 0px;
-}
 .ts {
   text-shadow: 1px 1px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
     -1px 1px 0 #141414, 1px 1px 0 #141414;
+}
+@media only screen and (min-width: 767.98px) {
+  .roundleft {
+    border-radius: 15px 0px 0px 15px;
+  }
+  .roundright {
+    border-radius: 0px 15px 15px 0px;
+  }
 }
 </style>

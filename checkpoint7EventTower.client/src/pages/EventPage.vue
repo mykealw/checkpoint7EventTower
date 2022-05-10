@@ -73,7 +73,7 @@
     </div>
   </div>
   <div class="row mt-4">
-    <div class="col-md-10">
+    <div v-if="account.id" class="col-md-10">
       <form @submit.prevent="createComment()">
         <label for="New Comment" class="visually-hidden"> New Comment:</label>
         <textarea
