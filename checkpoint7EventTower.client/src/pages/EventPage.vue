@@ -64,7 +64,10 @@
       </button>
     </div>
   </div>
-  <div v-if="events.isCanceled == false" class="row mt-4 d-flex justify-content-center">
+  <div
+    v-if="events.isCanceled == false"
+    class="row mt-4 d-flex justify-content-center"
+  >
     <div class="col-md-11 bg-dark rounded p-1">
       <Tickets v-for="t in ticket" :key="t.id" :ticket="t" />
     </div>
@@ -80,7 +83,7 @@
           rows="5"
           cols="100"
         ></textarea>
-        <div>
+        <div class="d-flex justify-content-end col-md-2">
           <button class="btn btn-success">Submit</button>
         </div>
       </form>

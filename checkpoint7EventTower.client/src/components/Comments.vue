@@ -1,5 +1,5 @@
 <template>
-  <div class="comments p-1 bg-dark col-md-6 m-1 d-flex rounded">
+  <div class="comments p-1 bg-dark col-md-10 m-1 d-flex rounded">
     <div>
       <img
         class="rounded compic"
