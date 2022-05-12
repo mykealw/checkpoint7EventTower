@@ -30,5 +30,6 @@ export default {
   border-radius: 50%;
   border: 3px;
   border-color: black;
+  object-fit: cover;
 }
 </style>

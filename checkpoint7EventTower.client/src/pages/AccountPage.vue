@@ -170,6 +170,7 @@ img {
   font-family: "Alegreya Sans", sans-serif;
 }
 .ticpic {
+  object-fit: cover;
   height: 26vh;
   width: 100%;
 }

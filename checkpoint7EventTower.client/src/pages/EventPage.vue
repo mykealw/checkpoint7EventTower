@@ -32,7 +32,9 @@
           >
             Sold Out
           </h4>
-          <h4 v-if="events.isCanceled" class="text-danger">EVENT CANCELED</h4>
+          <h4 v-if="events.isCanceled" class="text-danger ts">
+            EVENT CANCELED
+          </h4>
         </div>
         <button
           v-if="events.capacity > 0 && events.isCanceled == false && !stonks"
@@ -197,5 +199,9 @@ export default {
 }
 .jcsb {
   justify-content: space-between;
+}
+.ts {
+  text-shadow: 1px 1px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
+    -1px 1px 0 #141414, 1px 1px 0 #141414;
 }
 </style>
