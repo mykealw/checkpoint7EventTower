@@ -40,7 +40,7 @@ class EventsService {
     }
     async editEvent(eventUpdate) {
         // logger.log(eventUpdate, "this is what is coming through")
-        debugger
+        // debugger
         const res = await api.put('api/events/' + eventUpdate.id, eventUpdate)
         // logger.log(res.data, "this is the update")
         let index = AppState.towerEvents.findIndex(e => e.id === res.data.id)

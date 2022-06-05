@@ -66,8 +66,7 @@ export default {
     margin-left: 1vw;
   }
   .ts {
-    text-shadow: 1px 1px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
-      -1px 1px 0 #141414, 1px 1px 0 #141414;
+   
   }
   .so {
     margin-left: 12vw;
