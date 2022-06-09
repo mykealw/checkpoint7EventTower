@@ -3,7 +3,7 @@
     <div class="col-md-12 p-0 mt-2 position-relative">
       <img
         class="img1 border border-primary d-flex mx-auto"
-        src="src\assets\img\chairs.jpg"
+        src="https://images.unsplash.com/photo-1519750157634-b6d493a0f77c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
         alt=""
       />
       <h3 class="text-primary position-absolute marginT picfont ts text-start">
