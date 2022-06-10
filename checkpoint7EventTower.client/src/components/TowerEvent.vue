@@ -66,7 +66,7 @@ export default {
     margin-left: 1vw;
   }
   .ts {
-   
+    text-shadow: 2px 2px 0 #141414 !important;
   }
   .so {
     margin-left: 12vw;
@@ -93,8 +93,7 @@ export default {
     margin-left: 1vw;
   }
   .ts2 {
-    text-shadow: 1px 1px 0 #141414, -1px -1px 0 #141414, 1px -1px 0 #141414,
-      -1px 1px 0 #141414, 1px 1px 0 #141414;
+    text-shadow: 2px 2px 0 #141414 !important;
   }
   .tr2 {
     margin-top: 0em;
